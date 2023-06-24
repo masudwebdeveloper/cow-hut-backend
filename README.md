@@ -1,6 +1,6 @@
 # Digital Cow Hut Backend Assignment
 
-# [Online Cow Selling Backend for Eid Ul Adha](https://github.com/Programming-Hero-Web-Course4/l2a3-cow-hut-backend-assignment-masudwebdeveloper)
+# [cow-hut-admin-with-auth](https://github.com/Porgramming-Hero-web-course/l2b1a4-cow-hut-admin-auth-masudwebdeveloper)
 
 # [live-link](https://online-cow-selling-backend-for-eid-ul-adha.vercel.app/)
 

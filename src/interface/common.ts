@@ -16,3 +16,9 @@ export type IGenericResponse<T> = {
   };
   data: T | null;
 };
+
+export type Name = {
+  firstName: string;
+  middleName?: string;
+  lastName: string;
+};

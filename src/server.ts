@@ -11,7 +11,7 @@ process.on('uncaughtException', error => {
 let server: Server;
 async function dbConected() {
   try {
-    await connect(config.uri as string).then(() => {
+    await connect(config.uri as string, { autoIndex: true }).then(() => {
       console.log('🛢️ Database is Connected Successfully');
       server = app.listen(config.port, () => {
         console.log(`Cowhut server litening on port ${config.port}`);
