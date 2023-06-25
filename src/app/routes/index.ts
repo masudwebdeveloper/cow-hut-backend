@@ -5,6 +5,7 @@ import { OrderRoutes } from '../modules/order/order.routes';
 import { AdminRoutes } from '../modules/admin/admin.routes';
 import { AdminAuthRoutes } from '../modules/adminAuth/adminAuth.routes';
 import { AuthRoutes } from '../modules/auth/auth.routes';
+import { MyProfileRoutes } from '../modules/myProfile/myProfile.routes';
 
 const router = Router();
 const moduleRoutes = [
@@ -35,6 +36,10 @@ const moduleRoutes = [
   {
     path: '/auth',
     route: AuthRoutes,
+  },
+  {
+    path: '/my_profile',
+    route: MyProfileRoutes,
   },
 ];
 
