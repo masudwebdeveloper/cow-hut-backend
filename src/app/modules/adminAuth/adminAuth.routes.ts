@@ -11,4 +11,10 @@ router.post(
   AdminAuthController.adminAuthLogin
 );
 
+router.post(
+  '/refesh_token',
+  validateReqest(AdminAuthValidation.refeshTokenadminAuthZodScema),
+  AdminAuthController.refeshTokenAdminAuth
+);
+
 export const AdminAuthRoutes = router;

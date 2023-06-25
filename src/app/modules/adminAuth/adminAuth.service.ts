@@ -1,7 +1,11 @@
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
 import { Admin } from '../admin/admin.model';
-import { IAdminAuthData, IAdminAuthResponse } from './adminAuth.interface';
+import {
+  IAdminAuthData,
+  IAdminAuthResponse,
+  IRefeshTokenResponse,
+} from './adminAuth.interface';
 import { jwtHelper } from '../../../helpers/jwtHelper';
 import config from '../../../config';
 import { Secret } from 'jsonwebtoken';
@@ -42,12 +46,77 @@ const adminAuthLogin = async (
     config.jwt.refesh as Secret,
     { expiresIn: config.jwt.refesh_expires_in }
   );
+
   return {
     accessToken,
     refeshToken,
   };
 };
 
+//   token: string
+// ): Promise<IAdminAuthResponse> => {
+//   let verifiedToken = null;
+//   try {
+//     verifiedToken = jwtHelper.verifyToken(token, config.jwt.access as Secret);
+//   } catch (error) {
+//     throw new ApiError(httpStatus.FORBIDDEN, 'invalid refesh token');
+//   }
+
+//   const { id } = verifiedToken;
+
+//   const isAdminExist = await Admin.findOne({ id });
+
+//   if (!isAdminExist) {
+//     throw new ApiError(httpStatus.NOT_FOUND, 'admin does not exist');
+//   }
+
+//   const { id: adminId, role } = isAdminExist;
+
+//   const newAccessToken = jwtHelper.createToken(
+//     {
+//       id: adminId,
+//       role,
+//     },
+//     config.jwt.access as Secret,
+//     { expiresIn: config.jwt.expires_in }
+//   );
+
+//   return { accessToken: newAccessToken };
+// };
+const refeshTokenAdminAuth = async (
+  token: string
+): Promise<IRefeshTokenResponse> => {
+  let verifiedToken = null;
+  try {
+    verifiedToken = jwtHelper.verifyToken(token, config.jwt.refesh as Secret);
+  } catch (error) {
+    throw new ApiError(httpStatus.FORBIDDEN, 'invalid refresh token');
+  }
+  
+  const { id } = verifiedToken;
+  
+  const isAdminExist = await Admin.findOne({ _id: id });
+  
+  if (!isAdminExist) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'admin does not exist');
+  }
+  
+  const { id: adminId, role } = isAdminExist;
+
+  const newAccessToken = jwtHelper.createToken(
+    {
+      id: adminId,
+      role,
+    },
+    config.jwt.access as Secret,
+    { expiresIn: config.jwt.expires_in }
+  );
+  console.log({ accessToken: newAccessToken });
+
+  return { accessToken: newAccessToken };
+};
+
 export const AdminAuthService = {
   adminAuthLogin,
+  refeshTokenAdminAuth,
 };

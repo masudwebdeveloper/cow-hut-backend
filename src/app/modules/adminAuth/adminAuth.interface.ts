@@ -7,3 +7,7 @@ export type IAdminAuthResponse = {
   accessToken: string;
   refeshToken?: string | undefined;
 };
+
+export type IRefeshTokenResponse = {
+  accessToken: string;
+};

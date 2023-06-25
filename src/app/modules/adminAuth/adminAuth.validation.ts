@@ -10,7 +10,15 @@ const adminAuthZodScema = z.object({
     }),
   }),
 });
+const refeshTokenadminAuthZodScema = z.object({
+  cookies: z.object({
+    refeshToken: z.string({
+      required_error: 'refeshToken is required',
+    }),
+  }),
+});
 
-export const AdminAuthValidation ={
-    adminAuthZodScema
-}
+export const AdminAuthValidation = {
+  adminAuthZodScema,
+  refeshTokenadminAuthZodScema,
+};
