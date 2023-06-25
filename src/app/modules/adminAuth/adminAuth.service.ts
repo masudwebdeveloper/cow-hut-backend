@@ -111,7 +111,6 @@ const refeshTokenAdminAuth = async (
     config.jwt.access as Secret,
     { expiresIn: config.jwt.expires_in }
   );
-  console.log({ accessToken: newAccessToken });
 
   return { accessToken: newAccessToken };
 };

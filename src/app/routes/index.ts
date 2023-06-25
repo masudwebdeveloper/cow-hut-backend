@@ -4,6 +4,7 @@ import { CowRoutes } from '../modules/cow/cow.routes';
 import { OrderRoutes } from '../modules/order/order.routes';
 import { AdminRoutes } from '../modules/admin/admin.routes';
 import { AdminAuthRoutes } from '../modules/adminAuth/adminAuth.routes';
+import { AuthRoutes } from '../modules/auth/auth.routes';
 
 const router = Router();
 const moduleRoutes = [
@@ -30,6 +31,10 @@ const moduleRoutes = [
   {
     path: '/admins',
     route: AdminAuthRoutes,
+  },
+  {
+    path: '/auth',
+    route: AuthRoutes,
   },
 ];
 

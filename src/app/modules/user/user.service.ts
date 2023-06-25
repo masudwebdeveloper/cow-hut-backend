@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IUser, IUserFilters } from './user.interface';
 import { User } from './user.model';
-import config from '../../../config';
 import { IPaginationOptions } from '../../../interface/paginationOption';
 import { paginationHelper } from '../../../helpers/paginationHelper';
 import { IGenericResponse } from '../../../interface/common';
@@ -11,9 +10,6 @@ import ApiError from '../../../errors/ApiError';
 import httpStatus from 'http-status';
 
 const createUser = async (user: IUser): Promise<IUser> => {
-  if (!user.password) {
-    user.password = config.use_pass as string;
-  }
 
   if (user.role === 'buyer') {
     user.income = '0';
