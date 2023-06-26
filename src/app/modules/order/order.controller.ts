@@ -22,7 +22,10 @@ const createOrder = catchAsync(async (req: Request, res: Response) => {
 const getOrders = catchAsync(async (req: Request, res: Response) => {
   const paginationOptions = pick(req.query, paginationFields);
   const token = req.headers.authorization;
-  const result = await OrderService.getOrders(paginationOptions, token as string);
+  const result = await OrderService.getOrders(
+    paginationOptions,
+    token as string
+  );
   sendResponse<IOrder[]>(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -32,22 +35,23 @@ const getOrders = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const getOrder: RequestHandler = catchAsync( async (req: Request, res: Response)=>{
-  const {id} = req.params;
+const getOrder: RequestHandler = catchAsync(
+  async (req: Request, res: Response) => {
+    const { id } = req.params;
 
-  const result = await OrderService.getOrder(id);
+    const result = await OrderService.getOrder(id);
 
-  sendResponse<IOrder>(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'order information retrieved successfully',
-    data: result,
-  })
-
-})
+    sendResponse<IOrder>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'order information retrieved successfully',
+      data: result,
+    });
+  }
+);
 
 export const OrderController = {
   createOrder,
   getOrders,
-  getOrder
+  getOrder,
 };

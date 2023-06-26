@@ -26,6 +26,24 @@ const myProfile: RequestHandler = catchAsync(
   }
 );
 
+const updateProfile: RequestHandler = catchAsync(
+  async (req: Request, res: Response) => {
+    const token = req.headers.authorization;
+    const updateData = req.body;
+    const result = await MyProfileService.updateProfile(
+      token as string,
+      updateData
+    );
+    sendResponse<IUser>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'user update successfully',
+      data: result,
+    });
+  }
+);
+
 export const MyProfileController = {
   myProfile,
+  updateProfile,
 };
