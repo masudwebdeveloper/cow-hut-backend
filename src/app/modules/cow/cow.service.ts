@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { SortOrder, startSession } from 'mongoose';
 import { ICow, IFilters } from './cow.interface';
 import { Cow } from './cow.model';

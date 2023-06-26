@@ -7,6 +7,10 @@ import { Order } from './order.model';
 import { paginationHelper } from '../../../helpers/paginationHelper';
 import { IPaginationOptions } from '../../../interface/paginationOption';
 import { IGenericResponse } from '../../../interface/common';
+import { jwtHelper } from '../../../helpers/jwtHelper';
+import config from '../../../config';
+import { Secret } from 'jsonwebtoken';
+import httpStatus from 'http-status';
 
 const createOrder = async (payload: IOrder): Promise<IOrder | null> => {
   const { cow, buyer } = payload;
@@ -93,13 +97,33 @@ const createOrder = async (payload: IOrder): Promise<IOrder | null> => {
 };
 
 const getOrders = async (
-  paginationOptions: IPaginationOptions
+  paginationOptions: IPaginationOptions,
+  token: string
 ): Promise<IGenericResponse<IOrder[]>> => {
   const { page, limit, sortBy } =
     paginationHelper.calculatePagination(paginationOptions);
   const skip = (page - 1) * limit;
 
-  const result = await Order.find()
+  const verifiedToken = jwtHelper.verifyToken(
+    token,
+    config.jwt.access as Secret
+  );
+
+  if (!verifiedToken) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'invalid token');
+  }
+
+  const { id, role } = verifiedToken;
+  let cow = null;
+  if (role === 'seller') {
+    cow = await Cow.find({ seller: id });
+  }
+  const cowId = cow?.map(item => item._id);
+
+  const findCondition =
+    role === 'admin' ? {} : role === 'buyer' ? { buyer: id } : {cow: cowId};
+
+  const result = await Order.find(findCondition)
     .sort(sortBy)
     .skip(skip)
     .limit(limit)

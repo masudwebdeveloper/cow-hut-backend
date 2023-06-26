@@ -21,7 +21,8 @@ const createOrder = catchAsync(async (req: Request, res: Response) => {
 
 const getOrders = catchAsync(async (req: Request, res: Response) => {
   const paginationOptions = pick(req.query, paginationFields);
-  const result = await OrderService.getOrders(paginationOptions);
+  const token = req.headers.authorization;
+  const result = await OrderService.getOrders(paginationOptions, token as string);
   sendResponse<IOrder[]>(res, {
     statusCode: httpStatus.OK,
     success: true,
