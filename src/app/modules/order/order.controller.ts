@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, RequestHandler, Response } from 'express';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
 import { IOrder } from './order.interface';
@@ -32,7 +32,22 @@ const getOrders = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getOrder: RequestHandler = catchAsync( async (req: Request, res: Response)=>{
+  const {id} = req.params;
+
+  const result = await OrderService.getOrder(id);
+
+  sendResponse<IOrder>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'order information retrieved successfully',
+    data: result,
+  })
+
+})
+
 export const OrderController = {
   createOrder,
   getOrders,
+  getOrder
 };

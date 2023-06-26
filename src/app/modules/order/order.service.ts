@@ -121,14 +121,21 @@ const getOrders = async (
   const cowId = cow?.map(item => item._id);
 
   const findCondition =
-    role === 'admin' ? {} : role === 'buyer' ? { buyer: id } : {cow: cowId};
+    role === 'admin' ? {} : role === 'buyer' ? { buyer: id } : { cow: cowId };
 
   const result = await Order.find(findCondition)
+    .populate({
+      path: 'cow',
+      populate: [
+        {
+          path: 'seller',
+        },
+      ],
+    })
+    .populate('buyer')
     .sort(sortBy)
     .skip(skip)
-    .limit(limit)
-    .populate('cow')
-    .populate('buyer');
+    .limit(limit);
   const total = result.length;
 
   return {
@@ -141,7 +148,22 @@ const getOrders = async (
   };
 };
 
+const getOrder = async (id: string): Promise<IOrder | null> => {
+  const result = await Order.findOne({ _id: id })
+    .populate({
+      path: 'cow',
+      populate: [
+        {
+          path: 'seller',
+        },
+      ],
+    })
+    .populate('buyer');
+  return result;
+};
+
 export const OrderService = {
   createOrder,
   getOrders,
+  getOrder,
 };
