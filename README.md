@@ -1,12 +1,12 @@
-# Digital Cow Hut Backend Assignment
+### Digital Cow Hut Backend Assignment
 
-# [cow-hut-admin-with-auth](https://github.com/Porgramming-Hero-web-course/l2b1a4-cow-hut-admin-auth-masudwebdeveloper)
+### [cow-hut-admin-with-auth](https://github.com/Porgramming-Hero-web-course/l2b1a4-cow-hut-admin-auth-masudwebdeveloper)
 
-# [live-link](https://cow-hut-admin-with-auth-ten.vercel.app/)
+### [live-link](https://cow-hut-admin-with-auth-ten.vercel.app/)
 
 #
 
-# Admin
+#### Admin
 
 create admin
 
@@ -14,14 +14,14 @@ create admin
 
 #
 
-# Admin Auth
+#### Admin Auth
 
 - Route: https://cow-hut-admin-with-auth-ten.vercel.app/api/v1/admin/login (POST)
 - Route: https://cow-hut-admin-with-auth-ten.vercel.app/api/v1/admin/refesh_token (POST)
 
 #
 
-# User Auth
+#### User Auth
 
 - Route: https://cow-hut-admin-with-auth-ten.vercel.app/api/v1/auth/login (POST)
 - Route: https://cow-hut-admin-with-auth-ten.vercel.app/api/v1/auth/signup (POST) -> can create account buyer and seller
@@ -29,7 +29,7 @@ create admin
 
 #
 
-# User
+#### User
 
 - Route: https://cow-hut-admin-with-auth-ten.vercel.app/api/v1/users (GET) → Can only be accessed by admin
 - Route: https://cow-hut-admin-with-auth-ten.vercel.app/api/v1/users/:id (Single GET) → Can only be accessed by admin
@@ -38,7 +38,7 @@ create admin
 
 #
 
-# Cows
+#### Cows
 
 - Route: https://cow-hut-admin-with-auth-ten.vercel.app/api/v1/cows (POST) → Can only be accessed by seller
 - Route: https://cow-hut-admin-with-auth-ten.vercel.app/api/v1/cows (GET) → Can only be accessed by buyer,seller & admin
@@ -48,7 +48,7 @@ create admin
 
 #
 
-# Orders
+#### Orders
 
 - Route: https://cow-hut-admin-with-auth-ten.vercel.app/api/v1/orders (POST) → Can only be accessed by the buyer
 - Route: https://cow-hut-admin-with-auth-ten.vercel.app/api/v1/orders (GET) → Can be accessed only by the admin, by the specific buyer of this order & by the specific seller of this order
@@ -56,7 +56,7 @@ create admin
 
 #
 
-# Profile
+#### Profile
 
 - Route: https://cow-hut-admin-with-auth-ten.vercel.app/api/v1/my_profile (GET) -> can accessed by the admin, seller and buyer
 - Route: https://cow-hut-admin-with-auth-ten.vercel.app/api/v1/my_profile (PATCH) -> can only accessed by the seller and buyer
