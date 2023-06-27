@@ -2,79 +2,61 @@
 
 # [cow-hut-admin-with-auth](https://github.com/Porgramming-Hero-web-course/l2b1a4-cow-hut-admin-auth-masudwebdeveloper)
 
-# [live-link](https://online-cow-selling-backend-for-eid-ul-adha.vercel.app/)
+# [live-link]()
 
 #
+
+# Admin
+
+create admin
+
+- api/v1/admins/create_admin (POST)
+
+#
+
+# Admin Auth
+
+- api/v1/admin/login (POST)
+- api/v1/admin/refesh_token (POST)
+
+#
+
+# User Auth
+
+- api/v1/auth/login (POST)
+- api/v1/auth/signup (POST) -> can create account buyer and seller
+- api/v1/auth/refesh_token (POST)
+
+#
+
 # User
 
-- api/v1/auth/signup (POST)
-- api/v1/users (GET)
-- api/v1/users/:id (Single GET) Include an id that is saved in your database
-- api/v1/users/:id (PATCH)
-- api/v1/users/:id (DELETE) Include an id that is saved in your database
+- api/v1/users (GET) → Can only be accessed by admin
+- api/v1/users/:id (Single GET) → Can only be accessed by admin
+- api/v1/users/:id (PATCH) → Can only be accessed by admin
+- api/v1/users/:id (DELETE) → Can only be accessed by admin
 
 #
 
 # Cows
 
-- api/v1/cows (POST)
-- api/v1/cows (GET)
-- api/v1/cows/:id (Single GET) Include an id that is saved in your database
-- api/v1/cows/:id (PATCH)
-- api/v1/cows/:id (DELETE) Include an id that is saved in your database
-
-#
-
-# Pagination and Filtering routes of Cows
-
-- api/v1/cows?pag=1&limit=10
-- api/v1/cows?minPrice=20000&maxPrice=70000
-- api/v1/cows?location=Chattogram
-- api/v1/cows?sortBy=price&sortOrder=asc
-- api/v1/cows?searchTerm=Cha
+- api/v1/cows (POST) → Can only be accessed by seller
+- api/v1/cows (GET) → Can only be accessed by buyer,seller & admin
+- api/v1/cows/:id (Single GET) → Can only be accessed by buyer,seller & admin
+- api/v1/cows/:id (PATCH) → Can only be accessed by the seller of the cow
+- api/v1/cows/:id (DELETE) → Can only be accessed by the seller of the cow
 
 #
 
 # Orders
 
-- api/v1/orders (POST)
-- api/v1/orders (GET)
+- api/v1/orders (POST) → Can only be accessed by the buyer
+- api/v1/orders (GET) → Can be accessed only by the admin, by the specific buyer of this order & by the specific seller of this order
+- api/v1/orders/:id (GET) → Can be accessed only by the admin, by the specific buyer of this order & by the specific seller of this order
 
 #
 
-# User Model
+# Profile
 
-- <h3>Create a New User</h3>
-  <p>Router: /api/v1/auth/signup (POST)</p>
-- <h3>Get All Users</h3>
-  <p>Router: /api/v1/users (GET)</p>
-- <h3>Get Single User</h3>
-  <p>Router: /api/v1/users/:id (GET)</p>
-- <h3>Update Single User</h3>
-  <p>Router: /api/v1/users/:id (PATCH)</p>
-- <h3>Delete User</h3>
-  <p>Router: /api/v1/users/:id (DELETE)</p>
-
-#
-
-# Cow Model
-
-- <h3>Create a New Cow</h3>
-  <p>Router: /api/v1/cows  (POST)</p>
-- <h3>Get All Cows</h3>
-  <p>Route: /api/v1/cows (GET)</p>
-- <h3>Get a Single Cow</h3>
-  <p>Route: /api/v1/cows/:id (GET)</p>
-- <h3>Update a Single Cow</h3>
-  <p>Route: /api/v1/cows/:id (PATCH)</p>
-- <h3>Delete a Cow</h3>
-  <p>Route: /api/v1/cows/:id (DELETE)</p>
-
-#
-
-# Orders Model
-
-- <h3>Implement orders</h3>
-  <p>Route: /api/v1/orders (POST)</p>
-- <h3>Get All Orders</h3>
-  <p>Route: /api/v1/orders (GET)</p>
+- api/v1/my_profile (GET) -> can accessed by the admin, seller and buyer
+- api/v1/my_profile (PATCH) -> can only accessed by the seller and buyer

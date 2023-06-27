@@ -18,7 +18,7 @@ router.get('/', OrderController.getOrders);
 
 router.get(
   '/:id',
-  auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.BUYER),
+  auth(ENUM_USER_ROLE.ADMIN, ENUM_USER_ROLE.BUYER, ENUM_USER_ROLE.SELLER),
   OrderController.getOrder
 );
 
