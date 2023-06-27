@@ -8,6 +8,7 @@ import { User } from '../user/user.model';
 import { Secret } from 'jsonwebtoken';
 import { Admin } from '../admin/admin.model';
 import { IAdmin } from '../admin/admin.interface';
+import bcrypt from 'bcrypt';
 
 const myProfile = async (token: string): Promise<IUser | IAdmin | null> => {
   let verifiedToken = null;
@@ -38,15 +39,19 @@ const updateProfile = async (
   }
   const { id, role } = verifiedToken;
 
-  const isExist = await User.findOne({ _id: id, role });
+  const isUserExist = await User.findOne({ _id: id, role });
 
-  if (!isExist) {
+  if (!isUserExist) {
     throw new ApiError(httpStatus.NOT_FOUND, 'user not found');
   }
 
-  const { name, ...userData } = payload;
-
+  const { name, password, ...userData } = payload;
+  let hashPassword = null;
   const updatedUserData: Partial<IUser> = { ...userData };
+  if (password) {
+    hashPassword = await bcrypt.hash(password, Number(config.bcrypt_salt_round));
+    (updatedUserData as any).password = hashPassword;
+  }
 
   if (name && Object.keys(name).length > 0) {
     Object.keys(name).forEach(key => {

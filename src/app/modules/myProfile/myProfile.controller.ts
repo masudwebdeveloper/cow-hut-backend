@@ -37,7 +37,7 @@ const updateProfile: RequestHandler = catchAsync(
     sendResponse<IUser>(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: 'user update successfully',
+      message: 'my profile update successfully',
       data: result,
     });
   }

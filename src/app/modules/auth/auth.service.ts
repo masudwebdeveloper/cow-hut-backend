@@ -13,7 +13,8 @@ import { Secret } from 'jsonwebtoken';
 const login = async (payload: ILoginData): Promise<ILoginResponse> => {
   const { phoneNumber, password } = payload;
 
-  const isUserExist = await User.findOne({ phoneNumber });
+  const isUserExist = await User.findOne({ phoneNumber }).select('password');
+  
   if (!isUserExist) {
     throw new ApiError(httpStatus.NOT_FOUND, 'user not found');
   }
