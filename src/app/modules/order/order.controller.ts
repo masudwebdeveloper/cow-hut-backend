@@ -38,9 +38,8 @@ const getOrders = catchAsync(async (req: Request, res: Response) => {
 const getOrder: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
     const { id } = req.params;
-
-    const result = await OrderService.getOrder(id);
-
+    const token = req.headers.authorization;
+    const result = await OrderService.getOrder(id, token as string);
     sendResponse<IOrder>(res, {
       statusCode: httpStatus.OK,
       success: true,

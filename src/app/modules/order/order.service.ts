@@ -148,8 +148,16 @@ const getOrders = async (
   };
 };
 
-const getOrder = async (id: string): Promise<IOrder | null> => {
-  const result = await Order.findOne({ _id: id })
+const getOrder = async (id: string, token: string): Promise<IOrder | null> => {
+  let verifiedToken = null;
+  try {
+    verifiedToken = jwtHelper.verifyToken(token, config.jwt.access as Secret);
+  } catch (error) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'invalid token');
+  }
+
+  const { id: buyerId } = verifiedToken;
+  const result = await Order.findOne({ _id: id, buyer: buyerId })
     .populate({
       path: 'cow',
       populate: [
@@ -158,7 +166,7 @@ const getOrder = async (id: string): Promise<IOrder | null> => {
         },
       ],
     })
-    .populate('buyer');
+    .populate('buyer')
   return result;
 };
 

@@ -10,7 +10,7 @@ export const adminSchema = new Schema<IAdmin, AdminModel>(
     password: {
       type: String,
       required: true,
-      select: false,
+      select: 0,
     },
     role: {
       type: String,
@@ -50,12 +50,12 @@ export const adminSchema = new Schema<IAdmin, AdminModel>(
   }
 );
 
-adminSchema.statics.isPasswordMatch = async function(
+adminSchema.statics.isPasswordMatch = async function (
   givenPassword: string,
-  savedPasswrod: string,
-){
+  savedPasswrod: string
+) {
   return await compare(givenPassword, savedPasswrod);
-}
+};
 
 adminSchema.pre('save', async function (next) {
   const admin = this;

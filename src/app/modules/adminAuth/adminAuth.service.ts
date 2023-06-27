@@ -14,10 +14,10 @@ const adminAuthLogin = async (
   payload: IAdminAuthData
 ): Promise<IAdminAuthResponse> => {
   const { phoneNumber, password } = payload;
-  const isAdminExist = await Admin.findOne({ phoneNumber });
+  const isAdminExist = await Admin.findOne({ phoneNumber }).select('password');
   //check admin have or not
   if (!isAdminExist) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'admin can not find');
+    throw new ApiError(httpStatus.NOT_FOUND, "admin can't found !");
   }
 
   if (
@@ -53,36 +53,6 @@ const adminAuthLogin = async (
   };
 };
 
-//   token: string
-// ): Promise<IAdminAuthResponse> => {
-//   let verifiedToken = null;
-//   try {
-//     verifiedToken = jwtHelper.verifyToken(token, config.jwt.access as Secret);
-//   } catch (error) {
-//     throw new ApiError(httpStatus.FORBIDDEN, 'invalid refesh token');
-//   }
-
-//   const { id } = verifiedToken;
-
-//   const isAdminExist = await Admin.findOne({ id });
-
-//   if (!isAdminExist) {
-//     throw new ApiError(httpStatus.NOT_FOUND, 'admin does not exist');
-//   }
-
-//   const { id: adminId, role } = isAdminExist;
-
-//   const newAccessToken = jwtHelper.createToken(
-//     {
-//       id: adminId,
-//       role,
-//     },
-//     config.jwt.access as Secret,
-//     { expiresIn: config.jwt.expires_in }
-//   );
-
-//   return { accessToken: newAccessToken };
-// };
 const refeshTokenAdminAuth = async (
   token: string
 ): Promise<IRefeshTokenResponse> => {
@@ -92,15 +62,15 @@ const refeshTokenAdminAuth = async (
   } catch (error) {
     throw new ApiError(httpStatus.FORBIDDEN, 'invalid refresh token');
   }
-  
+
   const { id } = verifiedToken;
-  
+
   const isAdminExist = await Admin.findOne({ _id: id });
-  
+
   if (!isAdminExist) {
     throw new ApiError(httpStatus.NOT_FOUND, 'admin does not exist');
   }
-  
+
   const { id: adminId, role } = isAdminExist;
 
   const newAccessToken = jwtHelper.createToken(
