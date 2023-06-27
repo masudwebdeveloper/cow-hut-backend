@@ -4,7 +4,10 @@ import sendResponse from '../../../shared/sendResponse';
 import httpStatus from 'http-status';
 import { AdminAuthService } from './adminAuth.service';
 import config from '../../../config';
-import { IAdminAuthResponse, IRefeshTokenResponse } from './adminAuth.interface';
+import {
+  IAdminAuthResponse,
+  IRefeshTokenResponse,
+} from './adminAuth.interface';
 
 const adminAuthLogin: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {

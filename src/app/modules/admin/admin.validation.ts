@@ -6,9 +6,11 @@ const createAdminZodSchema = z.object({
     password: z.string({
       required_error: 'password is required',
     }),
-    role: z.enum([...role] as [string, ...string[]], {
-      required_error: 'role is required',
-    }).optional(),
+    role: z
+      .enum([...role] as [string, ...string[]], {
+        required_error: 'role is required',
+      })
+      .optional(),
     name: z.object({
       firstName: z.string({
         required_error: 'firstName is required',

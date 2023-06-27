@@ -6,6 +6,7 @@ import { AdminRoutes } from '../modules/admin/admin.routes';
 import { AdminAuthRoutes } from '../modules/adminAuth/adminAuth.routes';
 import { AuthRoutes } from '../modules/auth/auth.routes';
 import { MyProfileRoutes } from '../modules/myProfile/myProfile.routes';
+import { AdminProfileRoutes } from '../modules/adminProfile/adminProfile.routes';
 
 const router = Router();
 const moduleRoutes = [
@@ -40,6 +41,10 @@ const moduleRoutes = [
   {
     path: '/my_profile',
     route: MyProfileRoutes,
+  },
+  {
+    path: '/myProfile',
+    route: AdminProfileRoutes,
   },
 ];
 

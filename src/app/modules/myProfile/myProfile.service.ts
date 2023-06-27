@@ -49,7 +49,10 @@ const updateProfile = async (
   let hashPassword = null;
   const updatedUserData: Partial<IUser> = { ...userData };
   if (password) {
-    hashPassword = await bcrypt.hash(password, Number(config.bcrypt_salt_round));
+    hashPassword = await bcrypt.hash(
+      password,
+      Number(config.bcrypt_salt_round)
+    );
     (updatedUserData as any).password = hashPassword;
   }
 

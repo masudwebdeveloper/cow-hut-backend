@@ -14,7 +14,12 @@ const adminAuthLogin = async (
   payload: IAdminAuthData
 ): Promise<IAdminAuthResponse> => {
   const { phoneNumber, password } = payload;
-  const isAdminExist = await Admin.findOne({ phoneNumber }).select('password');
+  const isAdminExist = await Admin.findOne({ phoneNumber }).select({
+    password: 1,
+    role: 1,
+  });
+  console.log(isAdminExist);
+
   //check admin have or not
   if (!isAdminExist) {
     throw new ApiError(httpStatus.NOT_FOUND, "admin can't found !");

@@ -10,7 +10,6 @@ import ApiError from '../../../errors/ApiError';
 import httpStatus from 'http-status';
 
 const createUser = async (user: IUser): Promise<IUser> => {
-
   if (user.role === 'buyer') {
     user.income = '0';
   } else {
@@ -18,11 +17,11 @@ const createUser = async (user: IUser): Promise<IUser> => {
     user.income = '0';
   }
   // const result = await User.create(user);
-  const result = await User.init().
-  then(() => User.create(user)).
-  catch(error => {
-    throw error
-  });
+  const result = await User.init()
+    .then(() => User.create(user))
+    .catch(error => {
+      throw error;
+    });
   return result;
 };
 

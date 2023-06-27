@@ -54,5 +54,5 @@ const refeshToken: RequestHandler = catchAsync(
 
 export const AuthController = {
   login,
-  refeshToken
+  refeshToken,
 };

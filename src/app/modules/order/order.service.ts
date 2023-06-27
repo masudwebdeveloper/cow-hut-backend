@@ -166,7 +166,7 @@ const getOrder = async (id: string, token: string): Promise<IOrder | null> => {
         },
       ],
     })
-    .populate('buyer')
+    .populate('buyer');
   return result;
 };
 
