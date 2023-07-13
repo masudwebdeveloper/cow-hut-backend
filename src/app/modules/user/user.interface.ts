@@ -14,8 +14,8 @@ export type IUser = {
   name: Name;
   phoneNumber: string;
   address: string;
-  budget: string;
-  income: string;
+  budget: number;
+  income: number;
 };
 
 export type IUserFilters = {

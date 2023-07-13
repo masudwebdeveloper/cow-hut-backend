@@ -89,7 +89,14 @@ const createOrder = async (payload: IOrder): Promise<IOrder | null> => {
     throw new ApiError(500, 'Failed to create order.');
   } else {
     orderData = await Order.findById(orderData._id)
-      .populate('cow')
+      .populate({
+        path: 'cow',
+        populate: [
+          {
+            path: 'seller',
+          },
+        ],
+      })
       .populate('buyer');
   }
 

@@ -61,3 +61,5 @@ create admin
 - Route: https://cow-hut-admin-with-auth-ten.vercel.app/api/v1/my_profile (GET) -> can accessed by the admin, seller and buyer
 - Route: https://cow-hut-admin-with-auth-ten.vercel.app/api/v1/my_profile (PATCH) -> can only accessed by the seller and buyer
 - Route: https://cow-hut-admin-with-auth-ten.vercel.app/api/v1/myProfile (PATCH) -> can only accessed by the admin
+
+## This is my second assignment
